@@ -27,11 +27,11 @@ export function BankDetailsModal({ bank, onClose }: BankDetailsModalProps) {
         {/* Ijtimoiy tarmoq ko‘rsatkichlari */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <DetailMetric label="Obunachilar soni" value={(bank.subscribers ?? 0).toLocaleString()} />
-              <DetailMetric label="Jami postlar" value={(bank.total_posts ?? 0).toString()} />
+              <DetailMetric label="Jami nashrlar" value={(bank.total_posts ?? 0).toString()} />
               <DetailMetric label="Jami ko‘rishlar" value={(bank.total_views ?? 0).toLocaleString()} />
-              <DetailMetric label="Har bir post uchun o‘rtacha ko‘rishlar" value={(bank.avg_views_per_post ?? 0).toLocaleString()} />
-              <DetailMetric label="Har bir post uchun o‘rtacha layklar" value={(bank.avg_likes_per_post ?? 0).toFixed(1)} />
-              <DetailMetric label="Tahlil qilingan videolar soni" value={(bank.videos_fetched ?? 0).toString()} />
+              <DetailMetric label="Har bir video uchun o‘rtacha ko‘rishlar" value={(bank.avg_views_per_post ?? 0).toLocaleString()} />
+              <DetailMetric label="Har bir video uchun o‘rtacha layklar" value={(bank.avg_likes_per_post ?? 0).toFixed(1)} />
+              <DetailMetric label="Tahlil qilingan oxirgi nashrlar soni" value={(bank.videos_fetched ?? 0).toString()} />
             </div>
           {/* Jalb qilish tahlili */}
           <div className="border-t border-slate-800 pt-6">
@@ -42,8 +42,8 @@ export function BankDetailsModal({ bank, onClose }: BankDetailsModalProps) {
                 value={`${(((bank.avg_likes_per_post ?? 0) / (bank.avg_views_per_post || 1)) * 100).toFixed(2)}%`}
                 color="blue"
               />
-              <AnalysisRow label="Oyiga postlar soni" value={(bank.avg_posts_per_month ?? 0).toString()} color="green" />
-              <AnalysisRow label="Obunachi hajmi" value={`${(((bank.subscribers ?? 0) / 1000).toFixed(1))}K`} color="purple" />
+              <AnalysisRow label="O‘rtacha oylik postlar soni" value={(bank.avg_posts_per_month ?? 0).toString()} color="green" />
+              <AnalysisRow label="Obunachi soni" value={`${(((bank.subscribers ?? 0) / 1000).toFixed(1))}K`} color="purple" />
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export function BankDetailsModal({ bank, onClose }: BankDetailsModalProps) {
             <h3 className="text-lg font-semibold text-white mb-4">Faoliyat ko‘rsatkichlari</h3>
             <div className="space-y-3">
               <PerformanceBar
-                label="Jalb qilish sifati"
+                label="Jalb qilish darajasi"
                 value={Math.min(100, (((bank.avg_likes_per_post ?? 0) / (bank.avg_views_per_post || 1)) * 100))}
                 color="from-blue-500 to-cyan-500"
               />
