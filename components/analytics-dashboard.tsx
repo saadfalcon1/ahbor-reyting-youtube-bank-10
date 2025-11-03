@@ -52,7 +52,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
             Banklaring YouTubedagi faoliyati va ko‘rsatkichlari
           </h1>
           <p className="text-slate-400">
-            Yangilangan sana: 30-oktabr 2025-yil
+            Yangilangan sana: 31-oktabr 2025-yil
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <MetricCard label="Jami obunachilar" value={stats.totalFollowers.toLocaleString()} icon="👥" />
           <MetricCard label="O‘rtacha jalb qilish darajasi" value={`${stats.avgEngagementRate}%`} icon="📊" />
-          <MetricCard label="Har bir postga o‘rtacha layklar" value={stats.avgLikes} icon="❤️" />
+          <MetricCard label="Har bir nashrga o‘rtacha yoqtirishlar" value={stats.avgLikes} icon="❤️" />
           <MetricCard
             label="Eng faol kanal"
             value={stats.topBank.company_name}
@@ -84,7 +84,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white">Jalb qilish ko‘rsatkichlari</CardTitle>
-              <CardDescription>Har bir nashr uchun o‘rtacha layklar</CardDescription>
+              <CardDescription>Har bir nashr uchun o‘rtacha yoqtirishlar</CardDescription>
             </CardHeader>
             <CardContent>
               <EngagementChart data={insuranceData} onBankClick={onBankClick} />
@@ -94,7 +94,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white">O'rtacha nashrlar soni</CardTitle>
-              <CardDescription>Har bir kompaniya 1 oyda nechta nashr joylaydi</CardDescription>
+              <CardDescription>Har bir bank 1 oyda nechta nashr joylaydi</CardDescription>
             </CardHeader>
             <CardContent>
               <PostingFrequencyChart data={insuranceData} onBankClick={onBankClick} />
