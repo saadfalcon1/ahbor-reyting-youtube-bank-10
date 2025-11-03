@@ -4,7 +4,6 @@ import { useMemo } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { FollowersChart } from "./charts/followers-chart"
 import { EngagementChart } from "./charts/engagement-chart"
-import { EngagementRateChart } from "./charts/engagement-rate-chart"
 import { PostingFrequencyChart } from "./charts/posting-frequency-chart"
 import { BanksList } from "./banks-list"
 import { insuranceData } from "@/lib/data"
@@ -43,28 +42,34 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="flex items-center gap-2 text-3xl md:text-4xl font-bold text-white mb-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="flex items-center gap-2 text-3xl md:text-4xl font-bold text-white mb-2">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+                  alt="YouTube"
+                  className="h-10 md:h-12 w-auto"
+                />
+                Banklarning YouTubedagi faoliyati va ko‘rsatkichlari
+              </h1>
+              <p className="text-slate-400">
+                Yangilangan sana: 31-oktabr 2025-yil
+              </p>
+            </div>
+
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
-              alt="YouTube"
-              className="h-20 w-auto"
-            />
-            Banklaring YouTubedagi faoliyati va ko‘rsatkichlari
-          </h1>
-          <p className="text-slate-400">
-            Yangilangan sana: 31-oktabr 2025-yil
-          </p>
-          <img
               src="/Ahborlogo.png"
-              className="h-16 md:h-20 w-auto object-contain max-w-[120px] md:max-w-[160px]"
+              alt="Ahbor logo"
+              className="h-16 md:h-20 w-auto object-contain max-w-[120px] md:max-w-[160px] shrink-0 self-start sm:self-auto"
             />
+          </div>
         </div>
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <MetricCard label="Jami obunachilar" value={stats.totalFollowers.toLocaleString()} icon="👥" />
           <MetricCard label="O‘rtacha jalb qilish darajasi" value={`${stats.avgEngagementRate}%`} icon="📊" />
-          <MetricCard label="Har bir nashrga o‘rtacha yoqtirishlar" value={stats.avgLikes} icon="❤️" />
+          <MetricCard label="Har bir nashrga o‘rtacha yoqtirishlar soni" value={stats.avgLikes} icon="❤️" />
           <MetricCard
             label="Eng faol kanal"
             value={stats.topBank.company_name}
@@ -77,7 +82,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
-              <CardTitle className="text-white">Eng ko‘p obunachiga ega top 10 kanallar</CardTitle>
+              <CardTitle className="text-white">Eng ko‘p obunachilarga ega top-10 kanallar</CardTitle>
               <CardDescription>YouTubeda eng katta auditoriyaga ega banklar</CardDescription>
             </CardHeader>
             <CardContent>
@@ -88,7 +93,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white">Jalb qilish ko‘rsatkichlari</CardTitle>
-              <CardDescription>Har bir nashr uchun o‘rtacha yoqtirishlar</CardDescription>
+              <CardDescription>Har bir nashrga o‘rtacha yoqtirishlar sonir</CardDescription>
             </CardHeader>
             <CardContent>
               <EngagementChart data={insuranceData} onBankClick={onBankClick} />
@@ -98,7 +103,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
               <CardTitle className="text-white">O'rtacha nashrlar soni</CardTitle>
-              <CardDescription>Har bir bank 1 oyda nechta nashr joylaydi</CardDescription>
+              <CardDescription>Har bir bank tomonidan bir oyda joylashtirilgan nashrlar soni</CardDescription>
             </CardHeader>
             <CardContent>
               <PostingFrequencyChart data={insuranceData} onBankClick={onBankClick} />
