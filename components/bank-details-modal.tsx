@@ -42,8 +42,8 @@ export function BankDetailsModal({ bank, onClose }: BankDetailsModalProps) {
                 value={`${(((bank.avg_likes_per_post ?? 0) / (bank.avg_views_per_post || 1)) * 100).toFixed(2)}%`}
                 color="blue"
               />
-              <AnalysisRow label="O‘rtacha oylik postlar soni" value={(bank.avg_posts_per_month ?? 0).toString()} color="green" />
-              <AnalysisRow label="Obunachi soni" value={`${(((bank.subscribers ?? 0) / 1000).toFixed(1))}K`} color="purple" />
+              <AnalysisRow label="O‘rtacha oylik nashrlar soni" value={(bank.avg_posts_per_month ?? 0).toString()} color="green" />
+              <AnalysisRow label="Obunachilar soni" value={`${(((bank.subscribers ?? 0) / 1000).toFixed(1))}K`} color="purple" />
             </div>
           </div>
 
@@ -63,7 +63,7 @@ export function BankDetailsModal({ bank, onClose }: BankDetailsModalProps) {
             <div className="space-y-3">
               <PerformanceBar
                 label="Jalb qilish darajasi"
-                value={Math.min(100, (((bank.avg_likes_per_post ?? 0) / (bank.avg_views_per_post || 1)) * 100))}
+                value={Math.min(100, (((bank.avg_likes_per_post ?? 0) / (bank.avg_views_per_post || 1)) * 1000))}
                 color="from-blue-500 to-cyan-500"
               />
               <PerformanceBar
