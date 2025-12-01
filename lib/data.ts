@@ -266,7 +266,7 @@ export const insuranceData = [
     last_updated_date: "12/1/2025",
   },
   {
-    company_name: "Yangi Bank",
+    company_name: "YANGI BANK",
     username: "yangibank",
     subscribers: 744,
     total_posts: 243,
