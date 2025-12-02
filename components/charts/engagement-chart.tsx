@@ -14,7 +14,7 @@ const CustomTooltip = ({ active, payload }: any) => {
     return (
       <div className="bg-slate-900 border border-slate-600 rounded-lg p-2">
         <p className="text-slate-100 font-semibold">{data.bank.company_name}</p>
-        <p className="text-cyan-400">Yoqtirishlar soni: {data.likes}</p>
+        <p className="text-cyan-400">O'rtacha yoqtirishlar soni: {data.likes}</p>
       </div>
     )
   }
