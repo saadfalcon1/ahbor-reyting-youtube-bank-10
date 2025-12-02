@@ -75,13 +75,13 @@ export function BanksList({ data, onBankClick }: BanksListProps) {
                 onClick={() => handleSort("avg_likes_per_post")}
                 className="text-right py-3 px-4 text-slate-400 font-semibold cursor-pointer hover:text-white"
               >
-                O‘rtacha layklar {sortKey === "avg_likes_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
+                O‘rtacha yoqtirishlar soni {sortKey === "avg_likes_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
               </th>
               <th
                 onClick={() => handleSort("avg_views_per_post")}
                 className="text-right py-3 px-4 text-slate-400 font-semibold cursor-pointer hover:text-white"
               >
-                O‘rtacha ko‘rishlar {sortKey === "avg_views_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
+                O‘rtacha ko‘rishlar soni {sortKey === "avg_views_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
               </th>
               <th className="text-center py-3 px-4 text-slate-400 font-semibold">Batafsil</th>
             </tr>
