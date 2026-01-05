@@ -65,7 +65,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
             />
           </div>
 
-          <p className="text-slate-400 text-sm md:text-base mt-3">Yangilangan sana: 01-dekabr 2025-yil</p>
+          <p className="text-slate-400 text-sm md:text-base mt-3">Yangilangan sana: 31-dekabr 2025-yil</p>
         </div>
 
         {/* Key Metrics */}
