@@ -1,46 +1,91 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { FollowersChart } from "./charts/followers-chart"
 import { EngagementChart } from "./charts/engagement-chart"
 import { PostingFrequencyChart } from "./charts/posting-frequency-chart"
 import { BanksList } from "./banks-list"
-import { insuranceData } from "@/lib/data"
+import { INSURANCE_BY_MONTH } from "@/lib/monthly-data"
 
-interface AnalyticsDashboardProps {
-  onBankClick: (bank: (typeof insuranceData)[0]) => void
+// Bank ma'lumotlari qanday bo‘lishini aniq tip qilib beramiz
+export interface Bank {
+  company_name: string
+  subscribers?: number        // YouTube obunachilar
+  followers?: number          // Agar ishlatilsa (Instagram uchun)
+  avg_views_per_post?: number
+  avg_likes_per_post?: number
+  avg_likes?: number          // Instagram strukturasida bo‘lsa
+  // kerak bo‘lsa boshqa fieldlarni ham qo‘shib chiqarsan
 }
 
-export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
-  const stats = useMemo(() => {
-    const totalFollowers = insuranceData.reduce((sum, bank) => sum + (bank.subscribers ?? 0), 0)
+type MonthKey = keyof typeof INSURANCE_BY_MONTH
+// Har oy massivida Banklar bo‘ladi deb faraz qilamiz
+// (agar kerak bo‘lsa monthly-data.ts faylida ham shu interfeysni ishlat)
+type MonthData = Bank[]
 
-    const engagementRates = insuranceData.map((b) => {
+interface AnalyticsDashboardProps {
+  onBankClick: (bank: Bank) => void
+}
+
+const MONTHS: { key: MonthKey; label: string }[] = [
+  { key: "nov", label: "Noyabr" },
+  { key: "dec", label: "Dekabr" },
+]
+
+export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
+  const [selectedMonth, setSelectedMonth] = useState<MonthKey>("dec")
+
+  const currentMonthData: MonthData = (INSURANCE_BY_MONTH[selectedMonth] ?? []) as MonthData
+
+  const stats = useMemo(() => {
+    if (!currentMonthData.length) {
+      return {
+        totalFollowers: 0,
+        avgEngagementRate: "0.00",
+        avgLikes: "0.0",
+        topBank: null as Bank | null,
+      }
+    }
+
+    // subscribers bo‘lsa o‘shani, bo‘lmasa followers ni olamiz
+    const totalFollowers = currentMonthData.reduce((sum, bank) => {
+      const subs = bank.subscribers ?? bank.followers ?? 0
+      return sum + subs
+    }, 0)
+
+    const engagementRates = currentMonthData.map((b) => {
       const views = b.avg_views_per_post ?? 0
       const likes = b.avg_likes_per_post ?? 0
       return views > 0 ? (likes / views) * 100 : 0
     })
-    const avgEngagementRate = (engagementRates.reduce((a, b) => a + b, 0) / (engagementRates.length || 1)).toFixed(2)
+
+    const avgEngagementRate = (
+      engagementRates.reduce((a, b) => a + b, 0) / (engagementRates.length || 1)
+    ).toFixed(2)
 
     const avgLikes = (
-      insuranceData.reduce((sum, bank) => sum + (bank.avg_likes_per_post ?? 0), 0) / (insuranceData.length || 1)
+      currentMonthData.reduce(
+        (sum, bank) => sum + (bank.avg_likes_per_post ?? bank.avg_likes ?? 0),
+        0,
+      ) / (currentMonthData.length || 1)
     ).toFixed(1)
 
-    const topBank = insuranceData.reduce((prev, current) =>
-      (current.subscribers ?? 0) > (prev.subscribers ?? 0) ? current : prev,
-    )
+    const topBank = currentMonthData.reduce((prev, current) => {
+      const prevSubs = prev.subscribers ?? prev.followers ?? 0
+      const currSubs = current.subscribers ?? current.followers ?? 0
+      return currSubs > prevSubs ? current : prev
+    })
 
     return { totalFollowers, avgEngagementRate, avgLikes, topBank }
-  }, [])
+  }, [currentMonthData])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+        {/* HEADER */}
         <div className="mb-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            {/* YouTube logo + title - responsive sizing */}
             <div className="flex flex-1 items-center gap-2 md:gap-3">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
@@ -48,7 +93,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
                 className="h-8 md:h-12 w-auto flex-shrink-0"
               />
               <h1 className="text-xl md:text-4xl font-bold text-white break-words">
-                Banklarning YouTubedagi faoliyati va ko'rsatkichlari
+                Banklarning YouTubedagi faoliyati va ko&apos;rsatkichlari
               </h1>
               <img
                 src="/Ahborlogo.png"
@@ -57,7 +102,6 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
               />
             </div>
 
-            {/* Ahbor logo on desktop - larger and on the right */}
             <img
               src="/Ahborlogo.png"
               alt="Ahbor logo"
@@ -65,63 +109,99 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
             />
           </div>
 
-          <p className="text-slate-400 text-sm md:text-base mt-3">Yangilangan sana: Dekabr holatiga ko'ra</p>
+          <p className="text-slate-400 text-sm md:text-base mt-3"></p>
         </div>
 
-        {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <MetricCard label="Jami obunachilar" value={stats.totalFollowers.toLocaleString()} icon="👥" />
-          <MetricCard label="O'rtacha jalb qilish darajasi" value={`${stats.avgEngagementRate}%`} icon="📊" />
-          <MetricCard label="Har bir nashr uchun o'rtacha yoqtirishlar soni" value={stats.avgLikes} icon="❤️" />
-          <MetricCard
-            label="Eng ko'p obunachilarga ega bank"
-            value={stats.topBank.company_name}
-            icon="🏆"
-            subtitle={`${(stats.topBank.subscribers ?? 0).toLocaleString()} obunachi`}
-          />
+        {/* 🔘 OY FILTERI — SARLAVHADAN PASTDA */}
+        <div className="flex gap-2 mb-6">
+          {MONTHS.map((month) => (
+            <button
+              key={month.key}
+              onClick={() => setSelectedMonth(month.key)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition
+                ${
+                  selectedMonth === month.key
+                    ? "bg-red-600 text-white"
+                    : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                }`}
+            >
+              {month.label}
+            </button>
+          ))}
         </div>
 
-        {/* Charts Grid */}
+        {/* ASOSIY KO'RSATKICHLAR */}
+        {stats.topBank && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <MetricCard
+              label="Jami obunachilar"
+              value={stats.totalFollowers.toLocaleString()}
+              icon="👥"
+            />
+            <MetricCard
+              label="O&apos;rtacha jalb qilish darajasi"
+              value={`${stats.avgEngagementRate}%`}
+              icon="📊"
+            />
+            <MetricCard
+              label="Har bir nashr uchun o&apos;rtacha yoqtirishlar soni"
+              value={stats.avgLikes}
+              icon="❤️"
+            />
+            <MetricCard
+              label="Eng ko&apos;p obunachilarga ega bank"
+              value={stats.topBank.company_name}
+              icon="🏆"
+              subtitle={`${(stats.topBank.subscribers ?? stats.topBank.followers ?? 0).toLocaleString()} obunachi`}
+            />
+          </div>
+        )}
+
+        {/* DIAGRAMMALAR */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
-              <CardTitle className="text-white">Eng ko'p obunachilarga ega top-10 sug'urta kompaniyalari</CardTitle>
+              <CardTitle className="text-white">
+                Eng ko&apos;p obunachilarga ega top-10 banklar
+              </CardTitle>
               <CardDescription>YouTubeda eng katta auditoriyaga ega banklar</CardDescription>
             </CardHeader>
             <CardContent>
-              <FollowersChart data={insuranceData} onBankClick={onBankClick} />
+              <FollowersChart data={currentMonthData} onBankClick={onBankClick} />
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
-              <CardTitle className="text-white">O'rtacha yoqtirishlar soni</CardTitle>
-              <CardDescription>Har bir nashr uchun o'rtacha yoqtirishlar soni</CardDescription>
+              <CardTitle className="text-white">O&apos;rtacha yoqtirishlar soni</CardTitle>
+              <CardDescription>Har bir nashr uchun o&apos;rtacha yoqtirishlar soni</CardDescription>
             </CardHeader>
             <CardContent>
-              <EngagementChart data={insuranceData} onBankClick={onBankClick} />
+              <EngagementChart data={currentMonthData} onBankClick={onBankClick} />
             </CardContent>
           </Card>
 
           <Card className="bg-slate-900/50 border-slate-800">
             <CardHeader>
-              <CardTitle className="text-white">O'rtacha nashrlar soni</CardTitle>
-              <CardDescription>Har bir bank tomonidan bir oyda joylashtirilgan nashrlar soni</CardDescription>
+              <CardTitle className="text-white">O&apos;rtacha nashrlar soni</CardTitle>
+              <CardDescription>
+                Har bir bank tomonidan bir oyda joylashtirilgan nashrlar soni
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <PostingFrequencyChart data={insuranceData} onBankClick={onBankClick} />
+              <PostingFrequencyChart data={currentMonthData} onBankClick={onBankClick} />
             </CardContent>
           </Card>
         </div>
 
-        {/* Banks List */}
+        {/* RO'YXAT */}
         <Card className="bg-slate-900/50 border-slate-800">
           <CardHeader>
             <CardTitle className="text-white">Barcha bank kanallari</CardTitle>
-            <CardDescription>Kanal ma'lumotlari ro'yxat ko'rinishida</CardDescription>
+            <CardDescription>Kanal ma&apos;lumotlari ro&apos;yxat ko&apos;rinishida</CardDescription>
           </CardHeader>
           <CardContent>
-            <BanksList data={insuranceData} onBankClick={onBankClick} />
+            <BanksList data={currentMonthData} onBankClick={onBankClick} />
           </CardContent>
         </Card>
       </div>
