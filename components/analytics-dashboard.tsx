@@ -170,7 +170,7 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
               icon="👥"
             />
             <MetricCard
-              label="Sug'urta kompaniyalarida obunachilar o‘sishi (Noyabr–Dekabr)"
+              label="Bank sektorida obunachilar o‘sishi (Noyabr–Dekabr)"
               value={stats.followersDiff.toLocaleString()}
               icon="📊"
             />
