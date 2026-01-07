@@ -20,8 +20,6 @@ export interface Bank {
 }
 
 type MonthKey = keyof typeof INSURANCE_BY_MONTH
-// Har oy massivida Banklar bo‘ladi deb faraz qilamiz
-// (agar kerak bo‘lsa monthly-data.ts faylida ham shu interfeysni ishlat)
 type MonthData = Bank[]
 
 interface AnalyticsDashboardProps {
@@ -40,11 +38,28 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
 
   const stats = useMemo(() => {
     if (!currentMonthData.length) {
+      // Noyabr va dekabr bo'yicha farqni baribir hisoblab qo'yamiz
+      const novData = (INSURANCE_BY_MONTH["nov"] ?? []) as MonthData
+      const decData = (INSURANCE_BY_MONTH["dec"] ?? []) as MonthData
+
+      const novTotalFollowers = novData.reduce((sum, bank) => {
+        const subs = bank.subscribers ?? bank.followers ?? 0
+        return sum + subs
+      }, 0)
+
+      const decTotalFollowers = decData.reduce((sum, bank) => {
+        const subs = bank.subscribers ?? bank.followers ?? 0
+        return sum + subs
+      }, 0)
+
+      const followersDiff = decTotalFollowers - novTotalFollowers
+
       return {
         totalFollowers: 0,
         avgEngagementRate: "0.00",
         avgLikes: "0.0",
         topBank: null as Bank | null,
+        followersDiff,
       }
     }
 
@@ -77,7 +92,23 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
       return currSubs > prevSubs ? current : prev
     })
 
-    return { totalFollowers, avgEngagementRate, avgLikes, topBank }
+    // Noyabr va dekabr farqi
+    const novData = (INSURANCE_BY_MONTH["nov"] ?? []) as MonthData
+    const decData = (INSURANCE_BY_MONTH["dec"] ?? []) as MonthData
+
+    const novTotalFollowers = novData.reduce((sum, bank) => {
+      const subs = bank.subscribers ?? bank.followers ?? 0
+      return sum + subs
+    }, 0)
+
+    const decTotalFollowers = decData.reduce((sum, bank) => {
+      const subs = bank.subscribers ?? bank.followers ?? 0
+      return sum + subs
+    }, 0)
+
+    const followersDiff = decTotalFollowers - novTotalFollowers
+
+    return { totalFollowers, avgEngagementRate, avgLikes, topBank, followersDiff }
   }, [currentMonthData])
 
   return (
@@ -139,8 +170,8 @@ export function AnalyticsDashboard({ onBankClick }: AnalyticsDashboardProps) {
               icon="👥"
             />
             <MetricCard
-              label="O&apos;rtacha jalb qilish darajasi"
-              value={`${stats.avgEngagementRate}%`}
+              label="Sug'urta kompaniyalarida obunachilar o‘sishi (Noyabr–Dekabr)"
+              value={stats.followersDiff.toLocaleString()}
               icon="📊"
             />
             <MetricCard
