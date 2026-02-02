@@ -9,7 +9,7 @@ interface BanksListProps {
   onBankClick: (bank: (typeof insuranceData)[0]) => void
 }
 
-type SortKey = "subscribers" | "avg_likes_per_post" | "avg_views_per_post" | "company_name"
+type SortKey = "subscribers" | "avg_likes_per_post" | "company_name"
 
 export function BanksList({ data, onBankClick }: BanksListProps) {
   const [searchTerm, setSearchTerm] = useState("")
@@ -75,13 +75,7 @@ export function BanksList({ data, onBankClick }: BanksListProps) {
                 onClick={() => handleSort("avg_likes_per_post")}
                 className="text-right py-3 px-4 text-slate-400 font-semibold cursor-pointer hover:text-white"
               >
-                O‘rtacha yoqtirishlar soni {sortKey === "avg_likes_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
-              </th>
-              <th
-                onClick={() => handleSort("avg_views_per_post")}
-                className="text-right py-3 px-4 text-slate-400 font-semibold cursor-pointer hover:text-white"
-              >
-                O‘rtacha ko‘rishlar soni {sortKey === "avg_views_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
+                O'rtacha yoqtirishlar soni {sortKey === "avg_likes_per_post" && (sortOrder === "asc" ? "▲" : "▼")}
               </th>
               <th className="text-center py-3 px-4 text-slate-400 font-semibold">Batafsil</th>
             </tr>
@@ -97,7 +91,6 @@ export function BanksList({ data, onBankClick }: BanksListProps) {
                 <td className="py-3 px-4 text-slate-400">{bank.username}</td>
                 <td className="py-3 px-4 text-right text-white">{(bank.subscribers ?? 0).toLocaleString()}</td>
                 <td className="py-3 px-4 text-right text-slate-300">{(bank.avg_likes_per_post ?? 0).toFixed(1)}</td>
-                <td className="py-3 px-4 text-right text-slate-300">{(bank.avg_views_per_post ?? 0).toFixed(0)}</td>
                 <td className="py-3 px-4 text-center">
                   <button className="text-blue-400 hover:text-blue-300 font-medium text-xs">Ko'rish</button>
                 </td>
