@@ -11,7 +11,7 @@ export const insuranceData = [
     avg_views_per_post: 1585.56,
     avg_likes_per_post: 16.28,
     channel_created_date: "12/4/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Agrobank",
@@ -25,7 +25,7 @@ export const insuranceData = [
     avg_views_per_post: 93524.16,
     avg_likes_per_post: 800.16,
     channel_created_date: "11/28/2019",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Turonbank",
@@ -39,7 +39,7 @@ export const insuranceData = [
     avg_views_per_post: 648.9,
     avg_likes_per_post: 5.51,
     channel_created_date: "10/20/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Xalq Banki",
@@ -53,7 +53,7 @@ export const insuranceData = [
     avg_views_per_post: 6192.06,
     avg_likes_per_post: 42.08,
     channel_created_date: "8/21/2019",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "AVO Bank",
@@ -67,7 +67,7 @@ export const insuranceData = [
     avg_views_per_post: 11974.21,
     avg_likes_per_post: 117.16,
     channel_created_date: "8/24/2023",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Ipoteka Bank",
@@ -81,7 +81,7 @@ export const insuranceData = [
     avg_views_per_post: 2753.96,
     avg_likes_per_post: 16.08,
     channel_created_date: "5/21/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Hamkorbank",
@@ -95,7 +95,7 @@ export const insuranceData = [
     avg_views_per_post: 233.32,
     avg_likes_per_post: 3.48,
     channel_created_date: "8/9/2014",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "O‘zsanoatqurilishbank",
@@ -109,7 +109,7 @@ export const insuranceData = [
     avg_views_per_post: 561.4,
     avg_likes_per_post: 13.04,
     channel_created_date: "11/25/2019",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "O‘zmilliybank",
@@ -123,7 +123,7 @@ export const insuranceData = [
     avg_views_per_post: 210.84,
     avg_likes_per_post: 1.12,
     channel_created_date: "1/15/2018",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Ipak Yuli Bank",
@@ -137,7 +137,7 @@ export const insuranceData = [
     avg_views_per_post: 3365.33,
     avg_likes_per_post: 63.03,
     channel_created_date: "6/3/2019",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Aloqabank",
@@ -151,7 +151,7 @@ export const insuranceData = [
     avg_views_per_post: 2627.98,
     avg_likes_per_post: 39.13,
     channel_created_date: "5/17/2016",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "ANOR BANK",
@@ -165,7 +165,7 @@ export const insuranceData = [
     avg_views_per_post: 3570.52,
     avg_likes_per_post: 42.15,
     channel_created_date: "9/2/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "MKBANK",
@@ -179,7 +179,7 @@ export const insuranceData = [
     avg_views_per_post: 1560.99,
     avg_likes_per_post: 13.22,
     channel_created_date: "5/7/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Tenge Bank",
@@ -193,7 +193,7 @@ export const insuranceData = [
     avg_views_per_post: 55205.17,
     avg_likes_per_post: 259.11,
     channel_created_date: "10/20/2021",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Trastbank",
@@ -207,7 +207,7 @@ export const insuranceData = [
     avg_views_per_post: 2560.99,
     avg_likes_per_post: 20.01,
     channel_created_date: "9/8/2022",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "BRB",
@@ -221,7 +221,7 @@ export const insuranceData = [
     avg_views_per_post: 580.99,
     avg_likes_per_post: 5.87,
     channel_created_date: "4/28/2021",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Invest Finance Bank",
@@ -235,7 +235,7 @@ export const insuranceData = [
     avg_views_per_post: 14968.69,
     avg_likes_per_post: 74.54,
     channel_created_date: "2/8/2017",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Davr Bank",
@@ -249,7 +249,7 @@ export const insuranceData = [
     avg_views_per_post: 34189.31,
     avg_likes_per_post: 67.31,
     channel_created_date: "8/23/2021",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Asakabank",
@@ -263,7 +263,7 @@ export const insuranceData = [
     avg_views_per_post: 3158.21,
     avg_likes_per_post: 30.97,
     channel_created_date: "7/3/2020",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "YANGI BANK",
@@ -277,7 +277,7 @@ export const insuranceData = [
     avg_views_per_post: 1202.77,
     avg_likes_per_post: 5.26,
     channel_created_date: "5/29/2024",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Kapitalbank",
@@ -291,7 +291,7 @@ export const insuranceData = [
     avg_views_per_post: 1386.21,
     avg_likes_per_post: 4.48,
     channel_created_date: "3/19/2017",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Ziraat Bank Uzbekistan",
@@ -305,7 +305,7 @@ export const insuranceData = [
     avg_views_per_post: 2212.33,
     avg_likes_per_post: 18.17,
     channel_created_date: "3/7/2018",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
   {
     company_name: "Asia Alliance Bank",
@@ -319,6 +319,6 @@ export const insuranceData = [
     avg_views_per_post: 904.52,
     avg_likes_per_post: 5.23,
     channel_created_date: "12/20/2018",
-    last_updated_date: "1/2/2025",
+    last_updated_date: "1/2/2026",
   },
 ];
